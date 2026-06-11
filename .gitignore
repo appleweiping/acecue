@@ -26,3 +26,5 @@ extension/dist/
 .vscode/
 public/js/env.js
 public/extension.zip
+
+.vercel
