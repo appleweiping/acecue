@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body { width: 300px; margin: 0; font-family: -apple-system, "Segoe UI", "PingFang SC", "Malgun Gothic", sans-serif; background: #0b0d14; color: #eef0f7; }
+    .wrap { padding: 18px; }
+    .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 15px; margin-bottom: 4px; }
+    .glyph { width: 24px; height: 24px; border-radius: 7px; background: linear-gradient(135deg,#6d86ff,#4fb6e0); display: grid; place-items: center; color:#fff; font-weight:900; }
+    p { font-size: 12.5px; color: #a4abc2; line-height: 1.5; margin: 8px 0 14px; }
+    button { width: 100%; padding: 11px; border: none; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; font-family: inherit; }
+    .primary { background: linear-gradient(135deg,#6d86ff,#4fb6e0); color: #fff; }
+    .ghost { background: #161925; color: #eef0f7; border: 1px solid #232739; margin-top: 8px; }
+    .note { font-size: 11px; color: #6b7187; margin-top: 12px; line-height: 1.5; }
+    a { color: #6d86ff; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand"><span class="glyph">▲</span> AceCue</div>
+    <p id="desc">Capture this tab's audio and float an answer window over your interview.</p>
+    <button class="primary" id="start">Start on this tab</button>
+    <button class="ghost" id="open-app">Open full app & settings</button>
+    <p class="note" id="note">⚠ The overlay stays private when you share a single tab, not your whole screen. Add a Deepgram key in the app for clean interviewer-only transcription.</p>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

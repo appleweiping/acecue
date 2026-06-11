@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AceCue</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/css/acecue.css" />
+  <script src="/js/env.js"></script>
+</head>
+<body class="app">
+  <!-- header -->
+  <header class="app-header">
+    <a class="brand" href="/">
+      <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 15l7-9 7 9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="name">AceCue</span>
+    </a>
+    <nav class="tabs">
+      <button class="tab" data-route="live" data-i18n="nav.live">Live</button>
+      <button class="tab" data-route="practice" data-i18n="nav.practice">Practice</button>
+      <button class="tab" data-route="settings" data-i18n="nav.settings">Settings</button>
+      <button class="tab" data-route="account" data-i18n="nav.account">Account</button>
+    </nav>
+    <div class="spacer"></div>
+    <button class="icon-btn" id="theme-toggle" title="Theme">🌙</button>
+    <span id="lang-switch"></span>
+  </header>
+
+  <!-- ===== LIVE ===== -->
+  <section class="view" id="view-live">
+    <div class="live-toolbar">
+      <div class="group">
+        <span class="status-dot" id="status-dot"></span>
+        <button class="btn primary sm" id="btn-listen" data-i18n="app.listen">Listen</button>
+      </div>
+      <div class="group">
+        <label style="font-size:12px;color:var(--fg-soft)" data-i18n="app.model">Model</label>
+        <select class="input" id="live-model" style="width:auto;min-width:150px"></select>
+      </div>
+      <div class="group seg" id="seg-mode">
+        <button data-mode="full" class="active" data-i18n="app.full">Full</button>
+        <button data-mode="glance" data-i18n="app.glance">Glance</button>
+      </div>
+      <div class="spacer"></div>
+      <div class="slider-ctl"><span data-i18n="app.fontSize">Font</span><input type="range" id="font-range" min="13" max="24" /></div>
+      <div class="slider-ctl"><span data-i18n="app.opacity">Opacity</span><input type="range" id="opacity-range" min="55" max="100" /></div>
+      <button class="btn outline sm" id="btn-clear" data-i18n="app.clear">Clear</button>
+    </div>
+
+    <div class="live-body">
+      <div class="pane">
+        <div class="pane-head"><span data-i18n="app.transcript">Transcript</span></div>
+        <div class="pane-body" id="transcript"></div>
+      </div>
+      <div class="pane">
+        <div class="pane-head">
+          <span data-i18n="app.answer">Answer</span>
+          <div class="spacer" style="flex:1"></div>
+          <button class="btn outline sm" id="btn-regen" data-i18n="app.regenerate">Regenerate</button>
+          <button class="btn outline sm" id="btn-copy" data-i18n="app.copy">Copy</button>
+        </div>
+        <div class="pane-body">
+          <div id="answer-body"><div class="answer-empty" data-i18n="app.waitingQuestion">Waiting for the interviewer's question…</div></div>
+        </div>
+        <div class="ask-bar">
+          <input class="input" id="ask-input" data-i18n-ph="app.askPlaceholder" />
+          <button class="btn primary sm" id="ask-send">↵</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRACTICE ===== -->
+  <section class="view" id="view-practice">
+    <div class="view-pad">
+      <h2 class="view-title" data-i18n="practice.title">Practice interview</h2>
+      <p class="view-sub" data-i18n="practice.subtitle">A realistic mock interview with instant feedback.</p>
+
+      <div class="card-block" id="practice-setup">
+        <div class="field"><label data-i18n="practice.roleLabel">Target role</label><input class="input" id="pr-role" data-i18n-ph="practice.rolePlaceholder" /></div>
+        <div class="field">
+          <label data-i18n="practice.typeLabel">Interview type</label>
+          <select class="input" id="pr-type">
+            <option value="behavioral" data-i18n="practice.typeBehavioral">Behavioral</option>
+            <option value="technical" data-i18n="practice.typeTechnical">Technical</option>
+            <option value="coding" data-i18n="practice.typeCoding">Coding</option>
+            <option value="system" data-i18n="practice.typeSystem">System design</option>
+          </select>
+        </div>
+        <button class="btn primary" id="pr-start" data-i18n="practice.start">Start mock interview</button>
+      </div>
+
+      <div id="practice-run" style="display:none">
+        <div id="practice-thread"></div>
+        <div class="card-block">
+          <textarea class="input" id="pr-answer" data-i18n-ph="practice.answerPlaceholder"></textarea>
+          <div class="hint" data-i18n="practice.star">Tip: structure behavioral answers with STAR.</div>
+          <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+            <button class="btn primary sm" id="pr-feedback" data-i18n="practice.getFeedback">Get feedback</button>
+            <button class="btn ghost sm" id="pr-next" data-i18n="practice.next">Next question</button>
+            <button class="btn outline sm" id="pr-finish" data-i18n="practice.finish">Finish & summarize</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SETTINGS ===== -->
+  <section class="view" id="view-settings">
+    <div class="view-pad">
+      <h2 class="view-title" data-i18n="settings.title">Settings</h2>
+      <p class="view-sub" id="settings-sub"></p>
+
+      <div class="card-block">
+        <h3 data-i18n="settings.keysTitle">Model keys</h3>
+        <p class="block-desc" data-i18n="settings.keysDesc">Paste any provider key — we detect it automatically.</p>
+        <div class="key-row">
+          <input class="input mono" id="key-input" data-i18n-ph="settings.pasteKey" autocomplete="off" spellcheck="false" />
+          <span class="detected-tag" id="key-detected">—</span>
+          <button class="btn primary sm" id="key-save" data-i18n="settings.saveKey">Save key</button>
+        </div>
+        <div class="saved-keys" id="saved-keys"></div>
+      </div>
+
+      <div class="card-block">
+        <h3 data-i18n="settings.contextTitle">Your context</h3>
+        <p class="block-desc" data-i18n="settings.contextDesc">Used to tailor answers. Stored on your device.</p>
+        <div class="field"><label data-i18n="settings.resume">Résumé / background</label><textarea class="input" id="set-resume" data-i18n-ph="settings.resumePlaceholder"></textarea></div>
+        <div class="field"><label data-i18n="settings.jd">Job description</label><textarea class="input" id="set-jd" data-i18n-ph="settings.jdPlaceholder"></textarea></div>
+      </div>
+
+      <div class="card-block">
+        <h3 data-i18n="settings.sttTitle">Speech-to-text engine</h3>
+        <p class="block-desc" data-i18n="settings.sttDesc">How AceCue turns speech into text.</p>
+        <div class="field">
+          <select class="input" id="set-stt">
+            <option value="browser" data-i18n="settings.sttFree">Browser (free)</option>
+            <option value="deepgram" data-i18n="settings.sttDeepgram">Deepgram (your key)</option>
+            <option value="assembly" data-i18n="settings.sttAssembly">AssemblyAI (your key)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card-block">
+        <h3 data-i18n="settings.answerTitle">Answer style</h3>
+        <div class="field">
+          <label data-i18n="settings.tone">Tone</label>
+          <select class="input" id="set-tone">
+            <option value="concise" data-i18n="settings.toneConcise">Concise</option>
+            <option value="balanced" data-i18n="settings.toneBalanced">Balanced</option>
+            <option value="detailed" data-i18n="settings.toneDetailed">Detailed</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn primary" id="settings-save" data-i18n="settings.save">Save</button>
+    </div>
+  </section>
+
+  <!-- ===== ACCOUNT ===== -->
+  <section class="view" id="view-account">
+    <div class="view-pad" style="max-width:460px">
+      <h2 class="view-title" data-i18n="account.title">Account</h2>
+      <div class="card-block" id="account-card">
+        <h3 id="acc-state-title" data-i18n="account.guestTitle">You're using AceCue as a guest</h3>
+        <p class="block-desc" data-i18n="account.guestBody">Everything works without an account.</p>
+        <div id="acc-form">
+          <div class="field"><label data-i18n="account.email">Email</label><input class="input" id="acc-email" type="email" autocomplete="email" /></div>
+          <div class="field"><label data-i18n="account.password">Password</label><input class="input" id="acc-pass" type="password" autocomplete="current-password" /></div>
+          <div style="display:flex;gap:10px">
+            <button class="btn primary sm" id="acc-signin" data-i18n="account.signIn">Sign in</button>
+            <button class="btn ghost sm" id="acc-signup" data-i18n="account.signUp">Create account</button>
+          </div>
+          <p class="hint" style="margin-top:12px" data-i18n="account.neverSync">Your API keys never sync.</p>
+        </div>
+        <div id="acc-signed" style="display:none">
+          <p id="acc-email-label" style="font-weight:700;margin-bottom:10px"></p>
+          <button class="btn outline sm" id="acc-signout" data-i18n="account.signOut">Sign out</button>
+        </div>
+        <p class="hint" id="acc-disabled" style="display:none" data-i18n="account.disabled">Cloud sync isn't configured.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- onboarding modal (web tab-audio capture) -->
+  <div class="overlay" id="onboard-modal">
+    <div class="modal">
+      <h2 data-i18n="onboard.title">Capture your interview audio</h2>
+      <p class="desc" data-i18n="onboard.body">AceCue uses your tab's audio.</p>
+      <ol class="ol-steps">
+        <li data-i18n="onboard.step1">Click Start capture</li>
+        <li data-i18n="onboard.step2">Pick the meeting tab</li>
+        <li data-i18n="onboard.step3">Tick "Share tab audio"</li>
+      </ol>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+        <button class="btn primary" id="ob-start" data-i18n="onboard.start">Start capture</button>
+        <button class="btn ghost sm" id="ob-mic" data-i18n="onboard.micFallback">Use microphone instead</button>
+        <button class="btn outline sm" id="ob-type" data-i18n="onboard.typeFallback">I'll type questions</button>
+      </div>
+      <p class="hint" style="margin-top:14px" data-i18n="onboard.extHint">Tip: the Chrome plugin captures audio silently.</p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

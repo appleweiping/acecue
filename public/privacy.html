@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AceCue — Privacy & Ethics</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/css/acecue.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 15l7-9 7 9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="name">AceCue</span></a>
+    <div class="spacer"></div>
+    <nav>
+      <button class="icon-btn" id="theme-toggle" title="Theme">🌙</button>
+      <span id="lang-switch"></span>
+      <a class="btn ghost sm" href="/" data-i18n="nav.backHome">Home</a>
+    </nav>
+  </header>
+
+  <div class="section" style="padding-top:50px;padding-bottom:60px">
+    <div class="ethics-block" style="max-width:760px">
+      <h2 data-i18n="ethics.title">Use it honestly</h2>
+      <p data-i18n="ethics.body">AceCue is a preparation and accessibility aid.</p>
+      <p class="legit" data-i18n="ethics.practiceLegit">Practice Mode is always fair game.</p>
+    </div>
+
+    <div class="card-block" style="max-width:760px;margin:24px auto 0">
+      <h3 data-i18n="footer.privacy">Privacy & Ethics</h3>
+      <p class="block-desc" data-i18n="footer.disclaimer">AceCue does not record or store your interviews.</p>
+      <ul style="color:var(--fg-soft);font-size:14px;line-height:1.9;padding-left:18px;margin-top:10px">
+        <li data-i18n="account.neverSync">Your API keys never sync — they stay on this device.</li>
+        <li data-i18n="settings.keysDesc">Keys are stored only in this browser and forwarded only to that provider.</li>
+        <li data-i18n="distinction.honest">A browser plugin cannot hide itself from full-screen screen-sharing.</li>
+      </ul>
+    </div>
+
+    <p style="text-align:center;color:var(--fg-faint);font-size:13px;margin-top:30px">© <span id="year"></span> AceCue</p>
+  </div>
+
+  <script type="module">
+    import { I18N, mountLangSwitcher } from "/js/i18n.js";
+    import { Theme } from "/js/theme.js";
+    Theme.init();
+    await I18N.init();
+    document.getElementById("theme-toggle").addEventListener("click", () => Theme.toggle());
+    mountLangSwitcher(document.getElementById("lang-switch"));
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

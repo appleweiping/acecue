@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    :root { --fg:#eef0f7; --soft:#a4abc2; --faint:#6b7187; --bg:#0b0d14; --elev:#161925; --border:#232739; --accent:#6d86ff; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; font-family: -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans", "Malgun Gothic", sans-serif; background: var(--bg); color: var(--fg); }
+    body { display: flex; flex-direction: column; }
+    header { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--border); background: var(--elev); }
+    .brand { font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+    .glyph { width: 18px; height: 18px; border-radius: 5px; background: linear-gradient(135deg,#6d86ff,#4fb6e0); display: grid; place-items: center; color:#fff; font-size:10px; font-weight:900; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); }
+    .dot.live { background: #dc2626; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 50% { opacity: .5; } }
+    .spacer { flex: 1; }
+    button { border: 1px solid var(--border); background: var(--bg); color: var(--fg); border-radius: 7px; cursor: pointer; font-size: 12px; padding: 4px 8px; font-family: inherit; }
+    button.active { background: linear-gradient(135deg,#6d86ff,#4fb6e0); color: #fff; border-color: transparent; }
+    .q { padding: 8px 12px; font-size: 12px; color: var(--soft); border-bottom: 1px solid var(--border); font-style: italic; min-height: 18px; }
+    #answer { flex: 1; overflow-y: auto; padding: 14px; font-size: var(--fs,16px); line-height: 1.65; white-space: pre-wrap; word-break: break-word; }
+    #answer code { background: var(--elev); padding: 2px 5px; border-radius: 4px; font-family: ui-monospace, Consolas, monospace; font-size: .9em; }
+    #answer pre { background: var(--elev); border: 1px solid var(--border); padding: 12px; border-radius: 8px; overflow-x: auto; }
+    .empty { color: var(--faint); text-align: center; padding-top: 30px; font-size: 13px; }
+    footer { display: flex; gap: 6px; align-items: center; padding: 8px 10px; border-top: 1px solid var(--border); background: var(--elev); }
+    footer input[type=range] { width: 70px; accent-color: var(--accent); }
+    .lbl { font-size: 10px; color: var(--faint); }
+    .cursor::after { content:"▍"; color: var(--accent); animation: blink 1s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="brand"><span class="glyph">▲</span>AceCue</span>
+    <span class="dot live" id="dot"></span>
+    <div class="spacer"></div>
+    <button id="mode-full" class="active">Full</button>
+    <button id="mode-glance">Glance</button>
+    <button id="stop">Stop</button>
+  </header>
+  <div class="q" id="question">Listening…</div>
+  <div id="answer"><div class="empty">Waiting for the interviewer's question…</div></div>
+  <footer>
+    <span class="lbl">A</span><input type="range" id="fs" min="13" max="24" value="16" />
+    <span class="lbl">◐</span><input type="range" id="op" min="55" max="100" value="100" />
+    <div class="spacer"></div>
+    <button id="regen">↻</button>
+    <button id="copy">Copy</button>
+  </footer>
+  <script src="overlay.js"></script>
+</body>
+</html>

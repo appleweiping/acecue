@@ -1,0 +1,28 @@
+# deps
+node_modules/
+
+# vercel
+.vercel/
+.env
+.env.*
+!.env.example
+
+# os / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# secrets — never commit keys
+secrets.json
+*.key
+*.pem
+
+# build artifacts
+extension/*.zip
+extension/dist/
+
+# local
+.idea/
+.vscode/
+public/js/env.js
+public/extension.zip

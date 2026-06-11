@@ -1,0 +1,12 @@
+{
+  "name": "acecue",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AceCue — real-time interview copilot. Listens, detects the interviewer's question, and streams a fast, tailored answer. Multi-model BYOK, guest-first, pure Vercel edge + Chrome MV3 extension. EN / 中文 / 日本語 / 한국어.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve public",
+    "build": "node build.js"
+  }
+}

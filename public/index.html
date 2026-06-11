@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AceCue — Your quiet edge in every interview</title>
+  <meta name="description" content="AceCue is a real-time interview copilot. It listens, detects the interviewer's question, and streams a fast, tailored answer. Multi-model BYOK, free to start, Chrome plugin + web app. EN / 中文 / 日本語 / 한국어." />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/css/acecue.css" />
+  <meta property="og:title" content="AceCue — interview copilot" />
+  <meta property="og:description" content="Listens, thinks, and feeds you the right words — live or in practice." />
+  <meta property="og:type" content="website" />
+</head>
+<body>
+  <!-- header -->
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="glyph" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 15l7-9 7 9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="name">AceCue</span>
+    </a>
+    <div class="spacer"></div>
+    <nav>
+      <a class="btn ghost sm hide-sm" href="/privacy" data-i18n="nav.privacy">Privacy & Ethics</a>
+      <button class="icon-btn" id="theme-toggle" title="Theme" aria-label="Toggle theme">🌙</button>
+      <span id="lang-switch"></span>
+      <a class="btn outline sm hide-sm" href="/app#/account" data-i18n="nav.signIn">Sign in</a>
+      <a class="btn primary sm" href="/app#/live" data-i18n="nav.openApp">Open App</a>
+    </nav>
+  </header>
+
+  <!-- hero -->
+  <section class="section hero">
+    <span class="tagline" data-i18n="hero.tagline">Interview copilot</span>
+    <h1 data-i18n="hero.title">Your quiet edge in every interview.</h1>
+    <p class="sub" data-i18n="hero.subtitle">AceCue listens, thinks, and feeds you the right words — live or in practice.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="/app#/live" data-i18n="hero.ctaPrimary">Open Assistant</a>
+      <a class="btn ghost" href="/download" id="download-btn" data-i18n="hero.ctaSecondary">Download Chrome Plugin</a>
+      <a class="btn outline" href="/app#/practice" data-i18n="hero.ctaPractice">Try Practice Mode</a>
+    </div>
+  </section>
+
+  <!-- the two ways -->
+  <div class="section">
+    <div class="section-head">
+      <h2 data-i18n="distinction.title">Two ways to use AceCue</h2>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <span class="kicker">🧩 <span data-i18n="distinction.liveTitle">Live Copilot — the Chrome plugin</span></span>
+        <p data-i18n="distinction.liveBody">Captures your meeting tab's audio, detects the question, and shows a fast answer in a discreet floating window.</p>
+      </div>
+      <div class="card">
+        <span class="kicker">🌐 <span data-i18n="distinction.webTitle">Practice & setup — the web app</span></span>
+        <p data-i18n="distinction.webBody">No install. Run realistic mock interviews, configure your models and résumé, and rehearse answers.</p>
+      </div>
+    </div>
+    <div class="honest-note">
+      <span class="ic" aria-hidden="true">⚠</span>
+      <span data-i18n="distinction.honest">Honest note: a browser plugin cannot hide itself from full-screen screen-sharing.</span>
+    </div>
+  </div>
+
+  <!-- how it works -->
+  <div class="section">
+    <div class="section-head"><h2 data-i18n="how.title">How it works</h2></div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h4 data-i18n="how.step1Title">Paste any model key</h4><p data-i18n="how.step1Body">One box, auto-detected.</p></div>
+      <div class="step"><div class="num">2</div><h4 data-i18n="how.step2Title">Add your résumé + the job</h4><p data-i18n="how.step2Body">Tailored to your background.</p></div>
+      <div class="step"><div class="num">3</div><h4 data-i18n="how.step3Title">Get your cue, instantly</h4><p data-i18n="how.step3Body">A tailored answer in about a second.</p></div>
+    </div>
+  </div>
+
+  <!-- models -->
+  <div class="section">
+    <div class="section-head"><h2 data-i18n="models.title">Bring any model</h2><p data-i18n="models.body">Paste one key — AceCue detects the provider automatically.</p></div>
+    <div class="models-strip" id="models-strip"></div>
+  </div>
+
+  <!-- maker / contact -->
+  <div class="section" id="maker">
+    <div class="section-head"><h2 data-i18n="maker.title">Made by</h2></div>
+    <div class="maker">
+      <div class="avatar">W</div>
+      <div class="info">
+        <div class="role" data-i18n="maker.role">Creator & developer</div>
+        <h3 id="maker-name">Weiping</h3>
+        <p data-i18n="maker.blurb">Built solo, with care. Questions, feedback, or partnership — reach out anytime.</p>
+        <div class="links">
+          <a class="btn ghost sm" id="maker-email" href="mailto:appleweiping@example.com">✉ <span data-i18n="maker.email">Email</span></a>
+          <a class="btn ghost sm" id="maker-github" href="https://github.com/appleweiping" target="_blank" rel="noopener">⌥ <span data-i18n="maker.github">GitHub</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ethics -->
+  <div class="section" style="margin-top:80px">
+    <div class="ethics-block">
+      <h2 data-i18n="ethics.title">Use it honestly</h2>
+      <p data-i18n="ethics.body">AceCue is a preparation and accessibility aid.</p>
+      <p class="legit" data-i18n="ethics.practiceLegit">Practice Mode is always fair game.</p>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <footer class="site-footer">
+    <div class="row">
+      <a class="brand" href="/"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 15l7-9 7 9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="name">AceCue</span></a>
+      <nav style="display:flex;gap:12px;align-items:center">
+        <a class="btn ghost sm" href="/privacy" data-i18n="footer.privacy">Privacy & Ethics</a>
+        <span id="lang-switch-2"></span>
+      </nav>
+    </div>
+    <p class="disclaimer"><span data-i18n="footer.disclaimer">AceCue does not record or store your interviews.</span> · © <span id="year"></span> AceCue. <span data-i18n="footer.rights">All rights reserved.</span></p>
+  </footer>
+
+  <script type="module" src="/js/landing.js"></script>
+</body>
+</html>
