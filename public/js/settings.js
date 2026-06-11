@@ -22,6 +22,13 @@ export function initSettings(ctx) {
   $("key-save").addEventListener("click", saveKey);
   $("settings-save").addEventListener("click", saveAll);
 
+  // inline provider picker (fallback when auto-detect fails)
+  $("provider-pick-confirm").addEventListener("click", confirmProviderPick);
+  $("provider-pick-cancel").addEventListener("click", hideProviderPick);
+  $("provider-pick").addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { e.stopPropagation(); hideProviderPick(); }
+  });
+
   renderSavedKeys();
   window.addEventListener("acecue:view", (e) => { if (e.detail === "settings") renderSavedKeys(); });
 }
@@ -46,26 +53,59 @@ function onKeyInput(e) {
 function saveKey() {
   const key = $("key-input").value.trim();
   if (!key) return;
-  let provider = detectedProvider;
-  if (!provider) {
-    // ask the user to pick from a quick prompt of known providers
-    provider = pickProviderFallback();
-    if (!provider) return;
+  if (!detectedProvider) {
+    // detection failed → show the accessible inline picker instead
+    showProviderPick();
+    return;
   }
+  commitKey(detectedProvider, key);
+}
+
+function commitKey(provider, key) {
   Store.setKey(provider, key);
   $("key-input").value = "";
   $("key-detected").textContent = "—"; $("key-detected").className = "detected-tag";
   detectedProvider = null;
+  hideProviderPick();
   renderSavedKeys();
   toast(I18N.t("settings.saved"));
 }
 
-// If detection fails, build a tiny inline <select> the user can choose from.
-function pickProviderFallback() {
-  const ids = getCatalog().map((p) => p.id);
-  const labels = getCatalog().map((p) => p.label).join(", ");
-  const choice = window.prompt(`${I18N.t("settings.notDetected")}\n(${labels})`, ids[0] || "");
-  return ids.includes(choice) ? choice : null;
+// When detection fails, reveal an inline <select> of known providers with an
+// explicit confirm — keyboard- and screen-reader-friendly (label/for + focus).
+// Static fallback if /api/models hasn't loaded — mirrors detectProvider().
+const FALLBACK_PROVIDERS = [
+  { id: "openai", label: "OpenAI" },
+  { id: "claude", label: "Claude" },
+  { id: "gemini", label: "Gemini" },
+  { id: "groq", label: "Groq" },
+  { id: "deepseek", label: "DeepSeek" },
+  { id: "openrouter", label: "OpenRouter" },
+];
+
+function showProviderPick() {
+  const sel = $("provider-pick-select");
+  sel.innerHTML = "";
+  const catalog = getCatalog();
+  (catalog.length ? catalog : FALLBACK_PROVIDERS).forEach((p) => {
+    const opt = document.createElement("option");
+    opt.value = p.id;
+    opt.textContent = p.label || p.id;
+    sel.appendChild(opt);
+  });
+  $("provider-pick").hidden = false;
+  sel.focus();
+}
+
+function hideProviderPick() {
+  $("provider-pick").hidden = true;
+}
+
+function confirmProviderPick() {
+  const key = $("key-input").value.trim();
+  const provider = $("provider-pick-select").value;
+  if (!key || !provider) { hideProviderPick(); return; }
+  commitKey(provider, key);
 }
 
 function renderSavedKeys() {

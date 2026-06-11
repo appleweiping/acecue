@@ -119,6 +119,14 @@
           <span class="detected-tag" id="key-detected">—</span>
           <button class="btn primary sm" id="key-save" data-i18n="settings.saveKey">Save key</button>
         </div>
+        <div class="provider-pick" id="provider-pick" hidden>
+          <label for="provider-pick-select" data-i18n="settings.pickProvider">Choose the provider for this key</label>
+          <div class="key-row">
+            <select class="input" id="provider-pick-select"></select>
+            <button class="btn primary sm" id="provider-pick-confirm" data-i18n="settings.confirmProvider">Use this provider</button>
+            <button class="btn outline sm" id="provider-pick-cancel" data-i18n="settings.cancel">Cancel</button>
+          </div>
+        </div>
         <div class="saved-keys" id="saved-keys"></div>
       </div>
 
@@ -136,7 +144,6 @@
           <select class="input" id="set-stt">
             <option value="browser" data-i18n="settings.sttFree">Browser (free)</option>
             <option value="deepgram" data-i18n="settings.sttDeepgram">Deepgram (your key)</option>
-            <option value="assembly" data-i18n="settings.sttAssembly">AssemblyAI (your key)</option>
           </select>
         </div>
       </div>

@@ -47,7 +47,7 @@ Open the app, go to **Settings**, paste any model key, add your résumé + job d
 AceCue does not record or store your interviews. Audio is processed in your browser. BYOK keys live only in your browser's localStorage and are forwarded to the chosen provider for a single request — never logged or stored by us.
 
 ### Maker
-Built by **Weiping** — [email](mailto:appleweiping@example.com) · [GitHub](https://github.com/appleweiping). *(Update contact details in `public/js/landing.js`.)*
+Built by **Weiping** — [GitHub](https://github.com/appleweiping). *(Update contact details in `public/js/landing.js`.)*
 
 ---
 
@@ -86,7 +86,7 @@ npm run dev         # 本地启动 public/
 AceCue 不录制也不存储你的面试。音频在你的浏览器内处理。BYOK 密钥只存于浏览器 localStorage，仅在单次请求时转发给所选提供商 —— 我们绝不记录或存储。
 
 ### 制作人
-由 **Weiping** 打造 —— [邮箱](mailto:appleweiping@example.com) · [GitHub](https://github.com/appleweiping)。*（在 `public/js/landing.js` 中修改联系方式。）*
+由 **Weiping** 打造 —— [GitHub](https://github.com/appleweiping)。*（在 `public/js/landing.js` 中修改联系方式。）*
 
 ---
 
@@ -125,7 +125,7 @@ npm run dev         # public/ をローカル配信
 AceCue は面接を録音も保存もしません。音声はブラウザ内で処理されます。BYOK キーはブラウザの localStorage のみに保存され、単一リクエストで選択した提供元にのみ転送されます —— 当方が記録・保存することはありません。
 
 ### 制作者
-**Weiping** が制作 —— [メール](mailto:appleweiping@example.com) · [GitHub](https://github.com/appleweiping)。*(連絡先は `public/js/landing.js` で変更。)*
+**Weiping** が制作 —— [GitHub](https://github.com/appleweiping)。*(連絡先は `public/js/landing.js` で変更。)*
 
 ---
 
@@ -164,7 +164,7 @@ npm run dev         # public/ 로컬 서빙
 AceCue는 면접을 녹음하거나 저장하지 않습니다. 오디오는 브라우저에서 처리됩니다. BYOK 키는 브라우저 localStorage에만 저장되며 단일 요청 시 선택한 제공사에만 전달됩니다 —— 저희가 기록하거나 저장하지 않습니다.
 
 ### 제작자
-**Weiping** 제작 —— [이메일](mailto:appleweiping@example.com) · [GitHub](https://github.com/appleweiping). *(연락처는 `public/js/landing.js`에서 수정.)*
+**Weiping** 제작 —— [GitHub](https://github.com/appleweiping). *(연락처는 `public/js/landing.js`에서 수정.)*
 
 ---
 

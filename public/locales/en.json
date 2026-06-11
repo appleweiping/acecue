@@ -17,24 +17,40 @@
     "subtitle": "AceCue listens, thinks, and feeds you the right words — live or in practice. Bring any AI model, keep your data, pay nothing to start.",
     "ctaPrimary": "Open Assistant",
     "ctaSecondary": "Download Chrome Plugin",
-    "ctaPractice": "Try Practice Mode"
+    "honest": "Honest by design: it can't hide from full-screen sharing, and Practice Mode is always fair game.",
+    "scroll": "Scroll to explore"
+  },
+  "heroMock": {
+    "label": "AceCue · live overlay",
+    "status": "Listening",
+    "q": "Tell me about a time you led a project under pressure.",
+    "a": "Lead with the migration story: three engineers, a hard deadline, and the rollback plan that saved launch week…"
   },
   "distinction": {
     "title": "Two ways to use AceCue",
+    "subtitle": "One copilot, two moments. Pick the one in front of you.",
     "liveTitle": "Live Copilot — the Chrome plugin",
     "liveBody": "Captures your meeting tab's audio, detects the interviewer's question, and shows a fast answer in a discreet floating window over Zoom, Meet or Teams. This is the real live experience.",
+    "liveF1": "Silent tab-audio capture — no screen picker",
+    "liveF2": "Discreet overlay floats above Zoom, Meet, Teams",
+    "liveF3": "Panic-hide hotkey, opacity & glance mode",
+    "liveCta": "Download the extension",
     "webTitle": "Practice & setup — the web app",
     "webBody": "No install. Run realistic mock interviews, configure your models and résumé, and rehearse answers. You can also do live in the browser by sharing your meeting tab's audio — but the plugin overlay is smoother.",
+    "webF1": "Realistic mock interviews with instant feedback",
+    "webF2": "Set up keys, résumé and the job once — used everywhere",
+    "webF3": "Works in English, 中文, 日本語, 한국어",
+    "webCta": "Open the app",
     "honest": "Honest note: a browser plugin cannot hide itself from full-screen screen-sharing. It stays private when you share a single tab, not your whole screen. AceCue never pretends to be invisible."
   },
   "how": {
     "title": "How it works",
-    "step1Title": "Paste any model key",
-    "step1Body": "One box, auto-detected. Free tiers (Gemini, Qwen, GLM, Groq) or your own paid key — your choice.",
-    "step2Title": "Add your résumé + the job",
-    "step2Body": "AceCue tailors every answer to your background and the role. Stays on your device.",
-    "step3Title": "Get your cue, instantly",
-    "step3Body": "It hears the question and streams a tailored answer in about a second. Glance, speak, move on."
+    "step1Title": "It hears the room",
+    "step1Body": "AceCue captures your meeting tab's audio and transcribes it live — nothing is recorded or stored.",
+    "step2Title": "The question is detected",
+    "step2Body": "The moment the interviewer finishes asking, AceCue isolates the actual question from the chatter.",
+    "step3Title": "Your answer streams in",
+    "step3Body": "A response tailored to your résumé and the job appears in about a second. Glance, speak, move on."
   },
   "models": {
     "title": "Bring any model",
@@ -47,10 +63,16 @@
   "maker": {
     "title": "Made by",
     "role": "Creator & developer",
-    "contact": "Contact",
-    "email": "Email",
     "github": "GitHub",
     "blurb": "Built solo, with care. Questions, feedback, or partnership — reach out anytime."
+  },
+  "privacySec": {
+    "title": "Private by architecture",
+    "body": "AceCue is built so your interview never leaves your hands.",
+    "p1": "API keys live only in your browser — never on our servers.",
+    "p2": "Audio is transcribed in real time and never recorded or stored.",
+    "p3": "Your résumé and job context stay on your device unless you opt into sync.",
+    "cta": "Read the full Privacy & Ethics page"
   },
   "ethics": {
     "title": "Use it honestly",
@@ -136,7 +158,9 @@
     "sttDesc": "How AceCue turns speech into text.",
     "sttFree": "Browser (free, Chrome)",
     "sttDeepgram": "Deepgram (your key — fast & accurate)",
-    "sttAssembly": "AssemblyAI (your key — turn detection)",
+    "pickProvider": "Choose the provider for this key",
+    "confirmProvider": "Use this provider",
+    "cancel": "Cancel",
     "answerTitle": "Answer style",
     "tone": "Tone",
     "toneConcise": "Concise",

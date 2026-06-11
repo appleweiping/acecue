@@ -10,6 +10,19 @@
   <meta property="og:title" content="AceCue — interview copilot" />
   <meta property="og:description" content="Listens, thinks, and feeds you the right words — live or in practice." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://acecue.vercel.app/" />
+  <meta property="og:image" content="https://acecue.vercel.app/assets/banner.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AceCue — interview copilot" />
+  <meta name="twitter:description" content="Hear the question, see the answer. Real-time interview copilot — live or in practice." />
+  <meta name="twitter:image" content="https://acecue.vercel.app/assets/banner.png" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.182.0/build/three.module.js"
+      }
+    }
+  </script>
 </head>
 <body>
   <!-- header -->
@@ -30,78 +43,174 @@
     </nav>
   </header>
 
-  <!-- hero -->
-  <section class="section hero">
-    <span class="tagline" data-i18n="hero.tagline">Interview copilot</span>
-    <h1 data-i18n="hero.title">Your quiet edge in every interview.</h1>
-    <p class="sub" data-i18n="hero.subtitle">AceCue listens, thinks, and feeds you the right words — live or in practice.</p>
-    <div class="cta-row">
-      <a class="btn primary" href="/app#/live" data-i18n="hero.ctaPrimary">Open Assistant</a>
-      <a class="btn ghost" href="/download" id="download-btn" data-i18n="hero.ctaSecondary">Download Chrome Plugin</a>
-      <a class="btn outline" href="/app#/practice" data-i18n="hero.ctaPractice">Try Practice Mode</a>
+  <!-- ===== hero ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="hero-bg" aria-hidden="true">
+      <canvas id="hero-canvas"></canvas>
     </div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="tagline" data-i18n="hero.tagline">Interview copilot</span>
+        <h1 data-i18n="hero.title">Your quiet edge in every interview.</h1>
+        <p class="sub" data-i18n="hero.subtitle">AceCue listens, thinks, and feeds you the right words — live or in practice.</p>
+        <div class="cta-row">
+          <a class="btn primary lg" href="/app#/live" data-i18n="hero.ctaPrimary">Open Assistant</a>
+          <a class="btn glass lg" href="/extension.zip" id="download-btn" data-i18n="hero.ctaSecondary">Download Chrome Plugin</a>
+        </div>
+        <p class="hero-honest"><span class="ic" aria-hidden="true">⚖</span> <span data-i18n="hero.honest">Honest by design: it can't hide from full-screen sharing, and Practice Mode is always fair game.</span></p>
+      </div>
+
+      <!-- floating glass mock of the live overlay -->
+      <div class="hero-card" id="hero-card" aria-hidden="true">
+        <div class="hc-head">
+          <span class="hc-dot"></span>
+          <span class="hc-label" data-i18n="heroMock.label">AceCue · live overlay</span>
+          <span class="hc-status"><span class="hc-pulse"></span><span data-i18n="heroMock.status">Listening</span></span>
+        </div>
+        <div class="hc-q">
+          <span class="hc-qmark">?</span>
+          <span data-i18n="heroMock.q">Tell me about a time you led a project under pressure.</span>
+        </div>
+        <div class="hc-a">
+          <span data-i18n="heroMock.a">Lead with the migration story: three engineers, a hard deadline, and the rollback plan that saved launch week…</span><span class="hc-cursor"></span>
+        </div>
+      </div>
+    </div>
+    <a class="scroll-hint" href="#compare" aria-hidden="true" tabindex="-1">
+      <span data-i18n="hero.scroll">Scroll to explore</span>
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 10l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </section>
 
-  <!-- the two ways -->
-  <div class="section">
-    <div class="section-head">
+  <!-- ===== live vs practice ===== -->
+  <div class="section" id="compare">
+    <div class="section-head reveal">
       <h2 data-i18n="distinction.title">Two ways to use AceCue</h2>
+      <p data-i18n="distinction.subtitle">One copilot, two moments. Pick the one in front of you.</p>
     </div>
     <div class="grid-2">
-      <div class="card">
-        <span class="kicker">🧩 <span data-i18n="distinction.liveTitle">Live Copilot — the Chrome plugin</span></span>
+      <div class="card compare-card reveal">
+        <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v10m0 0a3.5 3.5 0 0 0 3.5-3.5v-3a3.5 3.5 0 1 0-7 0v3A3.5 3.5 0 0 0 12 13Zm-6-3.5a6 6 0 0 0 12 0M12 19v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> <span data-i18n="distinction.liveTitle">Live Copilot — the Chrome plugin</span></span>
         <p data-i18n="distinction.liveBody">Captures your meeting tab's audio, detects the question, and shows a fast answer in a discreet floating window.</p>
+        <ul class="feat-list">
+          <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="distinction.liveF1">Silent tab-audio capture — no screen picker</span></li>
+          <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="distinction.liveF2">Discreet overlay floats above Zoom, Meet, Teams</span></li>
+          <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="distinction.liveF3">Panic-hide hotkey, opacity & glance mode</span></li>
+        </ul>
+        <a class="btn outline sm card-cta" href="/extension.zip" data-i18n="distinction.liveCta">Download the extension</a>
       </div>
-      <div class="card">
-        <span class="kicker">🌐 <span data-i18n="distinction.webTitle">Practice & setup — the web app</span></span>
+      <div class="card compare-card reveal" style="--reveal-delay:.12s">
+        <span class="kicker"><svg class="ki" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5h-4l-3.8 3v-3H6.5A2.5 2.5 0 0 1 4 14.5v-8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg> <span data-i18n="distinction.webTitle">Practice & setup — the web app</span></span>
         <p data-i18n="distinction.webBody">No install. Run realistic mock interviews, configure your models and résumé, and rehearse answers.</p>
+        <ul class="feat-list">
+          <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="distinction.webF1">Realistic mock interviews with instant feedback</span></li>
+          <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="distinction.webF2">Set up keys, résumé and the job once — used everywhere</span></li>
+          <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="distinction.webF3">Works in English, 中文, 日本語, 한국어</span></li>
+        </ul>
+        <a class="btn outline sm card-cta" href="/app#/practice" data-i18n="distinction.webCta">Open the app</a>
       </div>
     </div>
-    <div class="honest-note">
+    <div class="honest-note reveal">
       <span class="ic" aria-hidden="true">⚠</span>
       <span data-i18n="distinction.honest">Honest note: a browser plugin cannot hide itself from full-screen screen-sharing.</span>
     </div>
   </div>
 
-  <!-- how it works -->
-  <div class="section">
-    <div class="section-head"><h2 data-i18n="how.title">How it works</h2></div>
-    <div class="steps">
-      <div class="step"><div class="num">1</div><h4 data-i18n="how.step1Title">Paste any model key</h4><p data-i18n="how.step1Body">One box, auto-detected.</p></div>
-      <div class="step"><div class="num">2</div><h4 data-i18n="how.step2Title">Add your résumé + the job</h4><p data-i18n="how.step2Body">Tailored to your background.</p></div>
-      <div class="step"><div class="num">3</div><h4 data-i18n="how.step3Title">Get your cue, instantly</h4><p data-i18n="how.step3Body">A tailored answer in about a second.</p></div>
+  <!-- ===== how it works ===== -->
+  <div class="section" id="how">
+    <div class="section-head reveal"><h2 data-i18n="how.title">How it works</h2></div>
+    <div class="steps-flow">
+      <svg class="flow-line" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true">
+        <path class="draw" pathLength="1" d="M40 30 C 220 30, 280 30, 500 30 S 780 30, 960 30" fill="none" stroke="url(#flowGrad)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1" />
+        <defs>
+          <linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" style="stop-color:var(--accent)" />
+            <stop offset="1" style="stop-color:var(--accent-2)" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-icon">
+            <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <path class="draw" pathLength="1" d="M8 24h4M14 18v12M20 12v24M26 16v16M32 20v8M38 22v4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="1" />
+            </svg>
+          </div>
+          <h4 data-i18n="how.step1Title">It hears the room</h4>
+          <p data-i18n="how.step1Body">AceCue captures your meeting tab's audio and transcribes it live — nothing is recorded or stored.</p>
+        </div>
+        <div class="step reveal" style="--reveal-delay:.15s">
+          <div class="step-icon">
+            <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <path class="draw" pathLength="1" d="M16 18a8 8 0 1 1 11 7.4c-2 .9-3 2.2-3 4.6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="1" />
+              <circle class="draw" pathLength="1" cx="24" cy="37" r="1.4" stroke="currentColor" stroke-width="2.6" stroke-dasharray="1" />
+            </svg>
+          </div>
+          <h4 data-i18n="how.step2Title">The question is detected</h4>
+          <p data-i18n="how.step2Body">The moment the interviewer finishes asking, AceCue isolates the actual question from the chatter.</p>
+        </div>
+        <div class="step reveal" style="--reveal-delay:.3s">
+          <div class="step-icon">
+            <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <rect class="draw" pathLength="1" x="9" y="12" width="30" height="24" rx="5" stroke="currentColor" stroke-width="2.6" stroke-dasharray="1" />
+              <path class="draw" pathLength="1" d="M15 20h18M15 26h12" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="1" />
+            </svg>
+          </div>
+          <h4 data-i18n="how.step3Title">Your answer streams in</h4>
+          <p data-i18n="how.step3Body">A response tailored to your résumé and the job appears in about a second. Glance, speak, move on.</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- models -->
-  <div class="section">
-    <div class="section-head"><h2 data-i18n="models.title">Bring any model</h2><p data-i18n="models.body">Paste one key — AceCue detects the provider automatically.</p></div>
-    <div class="models-strip" id="models-strip"></div>
+  <!-- ===== models ===== -->
+  <div class="section" id="models">
+    <div class="section-head reveal"><h2 data-i18n="models.title">Bring any model</h2><p data-i18n="models.body">Paste one key — AceCue detects the provider automatically.</p></div>
+    <div class="models-strip reveal" id="models-strip"></div>
   </div>
 
-  <!-- maker / contact -->
+  <!-- ===== ethics ===== -->
+  <div class="section" id="ethics" style="margin-top:90px">
+    <div class="ethics-block reveal">
+      <h2 data-i18n="ethics.title">Use it honestly</h2>
+      <p data-i18n="ethics.body">AceCue is a preparation and accessibility aid.</p>
+      <p class="legit" data-i18n="ethics.practiceLegit">Practice Mode is always fair game.</p>
+    </div>
+  </div>
+
+  <!-- ===== privacy summary ===== -->
+  <div class="section" id="privacy-summary">
+    <div class="section-head reveal"><h2 data-i18n="privacySec.title">Private by architecture</h2><p data-i18n="privacySec.body">AceCue is built so your interview never leaves your hands.</p></div>
+    <div class="privacy-grid reveal">
+      <div class="privacy-item">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7.5a4 4 0 1 1 8 0V10" stroke="currentColor" stroke-width="1.8"/></svg>
+        <p data-i18n="privacySec.p1">API keys live only in your browser — never on our servers.</p>
+      </div>
+      <div class="privacy-item">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h3l2.5-6 4 12 2.5-6h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p data-i18n="privacySec.p2">Audio is transcribed in real time and never recorded or stored.</p>
+      </div>
+      <div class="privacy-item">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.6-3 8.4-7 10-4-1.6-7-5.4-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.5 12l2 2 3.5-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p data-i18n="privacySec.p3">Your résumé and job context stay on your device unless you opt into sync.</p>
+      </div>
+    </div>
+    <p class="privacy-cta reveal"><a class="btn ghost" href="/privacy" data-i18n="privacySec.cta">Read the full Privacy & Ethics page</a></p>
+  </div>
+
+  <!-- ===== maker ===== -->
   <div class="section" id="maker">
-    <div class="section-head"><h2 data-i18n="maker.title">Made by</h2></div>
-    <div class="maker">
+    <div class="section-head reveal"><h2 data-i18n="maker.title">Made by</h2></div>
+    <div class="maker reveal">
       <div class="avatar">W</div>
       <div class="info">
         <div class="role" data-i18n="maker.role">Creator & developer</div>
         <h3 id="maker-name">Weiping</h3>
         <p data-i18n="maker.blurb">Built solo, with care. Questions, feedback, or partnership — reach out anytime.</p>
         <div class="links">
-          <a class="btn ghost sm" id="maker-email" href="mailto:appleweiping@example.com">✉ <span data-i18n="maker.email">Email</span></a>
           <a class="btn ghost sm" id="maker-github" href="https://github.com/appleweiping" target="_blank" rel="noopener">⌥ <span data-i18n="maker.github">GitHub</span></a>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- ethics -->
-  <div class="section" style="margin-top:80px">
-    <div class="ethics-block">
-      <h2 data-i18n="ethics.title">Use it honestly</h2>
-      <p data-i18n="ethics.body">AceCue is a preparation and accessibility aid.</p>
-      <p class="legit" data-i18n="ethics.practiceLegit">Practice Mode is always fair game.</p>
     </div>
   </div>
 
@@ -109,8 +218,9 @@
   <footer class="site-footer">
     <div class="row">
       <a class="brand" href="/"><span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 15l7-9 7 9" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="name">AceCue</span></a>
-      <nav style="display:flex;gap:12px;align-items:center">
+      <nav style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
         <a class="btn ghost sm" href="/privacy" data-i18n="footer.privacy">Privacy & Ethics</a>
+        <a class="btn ghost sm" href="https://github.com/appleweiping/acecue" target="_blank" rel="noopener">GitHub</a>
         <span id="lang-switch-2"></span>
       </nav>
     </div>
