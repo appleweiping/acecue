@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="./assets/banner.gif" alt="AceCue — real-time interview copilot" width="100%" />
+
 # ▲ AceCue
 
 **Your quiet edge in every interview.**
