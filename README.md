@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/banner.gif" alt="AceCue — real-time interview copilot" width="100%" />
+<img src="./assets/banner.png" alt="AceCue — real-time interview copilot" width="100%" />
 
 # ▲ AceCue
 
