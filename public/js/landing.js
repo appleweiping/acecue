@@ -4,7 +4,6 @@ import { Theme } from "./theme.js";
 
 const MAKER = {
   name: "Weiping",
-  email: "appleweiping@example.com",
   github: "https://github.com/appleweiping",
 };
 
@@ -21,14 +20,13 @@ async function main() {
 
   // maker contact (single source — edit MAKER above)
   const name = document.getElementById("maker-name"); if (name) name.textContent = MAKER.name;
-  const em = document.getElementById("maker-email"); if (em) em.href = `mailto:${MAKER.email}`;
   const gh = document.getElementById("maker-github"); if (gh) gh.href = MAKER.github;
 
-  // download button → extension zip (built/published later); falls back to install guide
-  document.getElementById("download-btn")?.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.location.href = "/extension.zip";
-  });
+  // scroll-reveal: fade/slide sections in; also triggers SVG line-draw (.draw)
+  initReveal();
+
+  // 3D hero — lazy, optional, never blocks the page.
+  initHeroLazy();
 
   // models strip from the live registry
   try {
@@ -50,6 +48,56 @@ async function main() {
     const strip = document.getElementById("models-strip");
     if (strip) I18N.apply(strip);
   });
+}
+
+function initReveal() {
+  const els = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) {
+    els.forEach((el) => el.classList.add("in-view"));
+    return;
+  }
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("in-view");
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.18, rootMargin: "0px 0px -40px 0px" }
+  );
+  els.forEach((el) => io.observe(el));
+
+  // line-draw containers (steps flow) reveal as a unit
+  const flow = document.querySelector(".steps-flow");
+  if (flow) {
+    const io2 = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          flow.classList.add("in-view");
+          io2.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    io2.observe(flow);
+  }
+}
+
+function initHeroLazy() {
+  const canvas = document.getElementById("hero-canvas");
+  if (!canvas) return;
+  // Defer the heavy import until the browser is idle so first paint stays fast.
+  const boot = () =>
+    import("./hero-3d.js")
+      .then((m) => m.initHero(canvas))
+      .catch(() => { /* fallback: CSS gradient hero stays */ });
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(boot, { timeout: 2000 });
+  } else {
+    setTimeout(boot, 300);
+  }
 }
 
 main();

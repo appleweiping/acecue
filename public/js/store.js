@@ -13,7 +13,7 @@ const LS = {
 const DEFAULT_SETTINGS = {
   provider: "groq",
   model: "",            // "" → provider default
-  stt: "browser",       // browser | deepgram | assembly
+  stt: "browser",       // browser | deepgram
   tone: "balanced",     // concise | balanced | detailed
   autoAnswer: true,     // fire on detected question vs manual hotkey only
   opacity: 100,
