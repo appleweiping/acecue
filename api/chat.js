@@ -48,7 +48,7 @@ export default async function handler(req) {
     }
     return await streamOpenAI(auth, mdl, messages, temperature, max_tokens);
   } catch (e) {
-    return json({ error: "upstream failed", message: String(e?.message || e) }, 502);
+    return json({ error: "upstream failed", message: redact(String(e?.message || e), auth.key) }, 502);
   }
 }
 
@@ -73,7 +73,7 @@ async function streamOpenAI(auth, model, messages, temperature, max_tokens) {
   });
 
   if (!upstream.ok || !upstream.body) {
-    const detail = await safeText(upstream);
+    const detail = redact(await safeText(upstream), auth.key);
     return json({ error: "upstream error", status: upstream.status, detail }, upstream.status || 502);
   }
 
@@ -116,7 +116,7 @@ async function streamAnthropic(auth, model, messages, temperature, max_tokens) {
   });
 
   if (!upstream.ok || !upstream.body) {
-    const detail = await safeText(upstream);
+    const detail = redact(await safeText(upstream), auth.key);
     return json({ error: "upstream error", status: upstream.status, detail }, upstream.status || 502);
   }
 
@@ -176,6 +176,13 @@ function sseResponse(stream) {
 
 async function safeText(r) {
   try { return (await r.text()).slice(0, 500); } catch { return ""; }
+}
+
+// Upstream error bodies sometimes echo the request's auth header back —
+// never let a BYOK/operator key reach the browser.
+function redact(text, secret) {
+  if (!secret) return text;
+  return String(text).split(secret).join("[redacted]");
 }
 
 function json(obj, status = 200) {
