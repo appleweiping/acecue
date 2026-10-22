@@ -106,7 +106,7 @@ export function resolveAuth(providerId, userKey, env = {}) {
   if (own) return { key: own, source: "user" };
   const envKey = env.ALLOW_OPERATOR_KEYS === "1" ? String(env[p.envKey] || "").trim() : "";
   if (envKey) return { key: envKey, source: "operator" };
-  return { error: `No ${p.label} key. Paste your own key in Settings.`, status: 401, code: "no-key" };
+  return { error: `No ${p.label} key was sent. Add your own key on the page.`, status: 401, code: "no-key" };
 }
 
 export function operatorKeyAvailable(providerId, env = {}) {
