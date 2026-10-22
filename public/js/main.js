@@ -214,7 +214,7 @@ async function ask(followUp) {
     if (!q) throw new Error("the model returned an empty question");
     showQuestion(q, `asked by ${s.model}`);
   } catch (e) {
-    toast(`AI question failed: ${e.message}. Using the built-in bank instead.`);
+    toast(`AI question failed: ${String(e.message).replace(/\.+$/, "")}. Using the built-in bank instead.`);
     showQuestion(nextQuestion(s.role, s.type, asked), "from the built-in question bank");
   } finally {
     setBusy(false);
