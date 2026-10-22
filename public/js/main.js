@@ -125,7 +125,7 @@ function detectFromKey() {
     $("provider").value = match.id;
     onProviderChange(false);
     $("key").value = key;
-    toast(`That looks like a ${match.label} key, so the provider was switched.`);
+    toast(`That key looks like it is for ${match.label}, so the provider was switched.`);
   }
 }
 
