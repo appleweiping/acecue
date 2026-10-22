@@ -4,7 +4,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   PROVIDERS, detectProvider, resolveAuth, checkOrigin, rateLimit, resetRateLimit,
-  validateBody, buildUpstreamRequest, handleChat, handleModels,
+  validateBody, buildUpstreamRequest, handleChat, handleModels, upstreamMessage,
 } from "../api/_providers.js";
 
 const HOST = "app.example.test";
@@ -170,7 +170,16 @@ test("handleChat redacts the key from upstream errors", async () => {
   const body = await res.json();
   assert.equal(body.error, "upstream-error");
   assert.ok(!body.message.includes("sk-secret-123"));
-  assert.match(body.message, /\[redacted\]/);
+  assert.equal(body.message, "OpenAI returned HTTP 401: invalid key [redacted]");
+});
+
+test("upstreamMessage reads the common provider error shapes", () => {
+  assert.equal(upstreamMessage('{"error":{"message":"Incorrect API key","type":"invalid_request_error"}}'), "Incorrect API key");
+  assert.equal(upstreamMessage('{"type":"error","error":{"type":"authentication_error","message":"invalid x-api-key"}}'), "invalid x-api-key");
+  assert.equal(upstreamMessage('[{"error":{"code":400,"message":"API key not valid"}}]'), "API key not valid");
+  assert.equal(upstreamMessage('{"message":"Unauthorized"}'), "Unauthorized");
+  assert.equal(upstreamMessage("Bad Gateway"), "Bad Gateway");
+  assert.equal(upstreamMessage(""), "");
 });
 
 test("operator keys are rate-limited per IP", async () => {

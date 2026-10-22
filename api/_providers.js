@@ -335,6 +335,21 @@ function redact(text, secret) {
   return secret ? s.split(secret).join("[redacted]") : s;
 }
 
+// Pull the human-readable part out of a provider's error body. Most use
+// {"error": {"message": ...}}, some {"error": "..."} or {"message": ...};
+// Gemini sometimes wraps it in an array.
+export function upstreamMessage(text) {
+  const s = String(text || "").trim();
+  try {
+    let j = JSON.parse(s);
+    if (Array.isArray(j)) j = j[0] || {};
+    const e = j.error;
+    const m = (typeof e === "string" ? e : e?.message) || j.message || j.detail;
+    if (m) return String(m).slice(0, 400);
+  } catch { /* not JSON */ }
+  return s.slice(0, 400);
+}
+
 function json(obj, status = 200, extra = {}) {
   return new Response(JSON.stringify(obj), {
     status,
@@ -376,9 +391,11 @@ export async function handleChat(req, env = {}, { fetchImpl = fetch } = {}) {
   }
   if (!upstream.ok || !upstream.body) {
     let detail = "";
-    try { detail = (await upstream.text()).slice(0, 600); } catch { /* ignore */ }
+    try { detail = (await upstream.text()).slice(0, 2000); } catch { /* ignore */ }
     const status = [400, 401, 402, 403, 404, 422, 429].includes(upstream.status) ? upstream.status : 502;
-    return json({ error: "upstream-error", status: upstream.status, message: redact(detail, auth.key) }, status);
+    const label = PROVIDERS[request.provider].label;
+    const message = `${label} returned HTTP ${upstream.status}: ${upstreamMessage(detail) || "no details"}`;
+    return json({ error: "upstream-error", status: upstream.status, message: redact(message, auth.key) }, status);
   }
 
   const protocol = PROVIDERS[request.provider].protocol;
